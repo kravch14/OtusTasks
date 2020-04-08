@@ -18,7 +18,7 @@ public class HomeTask {
 
 
     @Before
-    public void setUpChromeDriver() {
+    public void setUpDriver() {
         browser = System.getProperty("BROWSER");
         if (browser == null) {
             browser = System.getenv("BROWSER");
@@ -50,9 +50,12 @@ public class HomeTask {
     }
 
     @Test
-    public void openPageInChrome() {
+    public void openPageInBrowser() {
         driver.get("https://otus.ru/");
-        logger.info("Открыта страница в браузере " + browser);
+        if (!browser.equals("chrome") && !browser.equals("firefox"))
+            logger.info("Открыта страница в браузере chrome");
+        else
+            logger.info("Открыта страница в браузере " + browser);
     }
 
     @After
