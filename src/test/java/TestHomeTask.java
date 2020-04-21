@@ -18,7 +18,7 @@ public class TestHomeTask {
     public static final String OPEN_PAGE_IN_BROWSER_MESSAGE = "Открыта страница в браузере";
     public static final String BROWSER_CLOSED_MESSAGE = "Браузер закрыт";
     protected static WebDriver wd;
-    private Logger logger = LogManager.getLogger(TestHomeTask.class);
+    private static final Logger logger = LogManager.getLogger(TestHomeTask.class);
     private String browser;
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
@@ -29,12 +29,8 @@ public class TestHomeTask {
             browser = BROWSER_CHROME;
         }
         browser = browser.toUpperCase();
-        try {
-            wd = WebDriverFactory.createNewDriver(browser);
-            logger.info(browser + CREATE_DRIVER_MESSAGE);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        wd = WebDriverFactory.createNewDriver(browser);
+        logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
 
     @Test
@@ -50,6 +46,4 @@ public class TestHomeTask {
             logger.info(BROWSER_CLOSED_MESSAGE);
         }
     }
-
-
 }

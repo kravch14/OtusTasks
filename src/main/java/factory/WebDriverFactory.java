@@ -7,15 +7,16 @@ public class WebDriverFactory {
 
     private static Instance instance;
 
-    public static WebDriver createNewDriver(String browser) throws Exception {
+    public static WebDriver createNewDriver(String browser) {
 
         if (browser.equals(BrowserName.FIREFOX.toString())) {
             instance = new FirefoxInstance();
         } else if (browser.equals(BrowserName.CHROME.toString())) {
             instance = new ChromeInstance();
         } else
-            throw new Exception("Unknown browser name");
+            throw new IllegalArgumentException("Unknown browser name");
 
         return instance.createDriver();
     }
 }
+
