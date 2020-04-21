@@ -1,4 +1,5 @@
 import config.ServerConfig;
+import enums.BrowserName;
 import factory.WebDriverFactory;
 import listeners.ExecutionListener;
 import org.aeonbits.owner.ConfigFactory;
@@ -29,7 +30,8 @@ public class TestHomeTask {
             browser = BROWSER_CHROME;
         }
         browser = browser.toUpperCase();
-        wd = WebDriverFactory.createNewDriver(browser);
+        BrowserName browserName = BrowserName.getBrowserName(browser);
+        wd = WebDriverFactory.createNewDriver(browserName);
         logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
 
