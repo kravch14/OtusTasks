@@ -5,6 +5,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -24,12 +25,14 @@ public class TestHomeTask {
 
     @BeforeTest
     public void setUpDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
         browser = System.getProperty("browser", System.getenv("browser"));
         if (browser == null) {
             browser = BROWSER_CHROME;
         }
         browser = browser.toUpperCase();
-        wd = WebDriverFactory.createNewDriver(browser);
+        wd = WebDriverFactory.createNewDriver(browser, options);
         logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
 
