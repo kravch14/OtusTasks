@@ -23,6 +23,7 @@ public class TestHomeTask {
     protected static WebDriver wd;
     private static final Logger logger = LogManager.getLogger(TestHomeTask.class);
     private String browser;
+    private String option;
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
     @BeforeTest
@@ -34,14 +35,21 @@ public class TestHomeTask {
         }
         browser = browser.toUpperCase();
 
+        option = System.getProperty("option", System.getenv("option"));
+        if(option == null) {
+            wd = WebDriverFactory.createNewDriver(browser);
+        }
+        else {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+            wd = WebDriverFactory.createNewDriver(browser, options);
+        }
+        logger.info(browser + CREATE_DRIVER_MESSAGE);
         //String option = System.getProperty("option");
-        ChromeOptions options = new ChromeOptions();
-        //options.addArguments("headless");
+
         //options.addArguments("--disable-features=VizDisplayCompositor");
         //options.addArguments("--no-sandbox");
         //options.addArguments("--start-maximized");
-        wd = WebDriverFactory.createNewDriver(browser, options);
-        logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
 
     @Test
