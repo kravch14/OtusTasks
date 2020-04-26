@@ -2,7 +2,6 @@ import config.ServerConfig;
 import factory.WebDriverFactory;
 import listeners.ExecutionListener;
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -35,21 +34,15 @@ public class TestHomeTask {
         }
         browser = browser.toUpperCase();
 
-        option = System.getProperty("option", System.getenv("option"));
-        if(option == null) {
+        option = System.getProperty("options", System.getenv("options"));
+        if (option == null) {
             wd = WebDriverFactory.createNewDriver(browser);
-        }
-        else {
+        } else {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("headless");
+            options.addArguments(option);
             wd = WebDriverFactory.createNewDriver(browser, options);
         }
         logger.info(browser + CREATE_DRIVER_MESSAGE);
-        //String option = System.getProperty("option");
-
-        //options.addArguments("--disable-features=VizDisplayCompositor");
-        //options.addArguments("--no-sandbox");
-        //options.addArguments("--start-maximized");
     }
 
     @Test
