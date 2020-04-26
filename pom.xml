@@ -25,6 +25,7 @@
                     <configuration>
                         <systemPropertyVariables>
                             <browser>${browser}</browser>
+                            <option>${option}</option>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>

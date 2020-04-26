@@ -20,10 +20,10 @@ public class WebDriverFactory {
 
         if (browser.equals(BrowserName.FIREFOX.toString())) {
             WebDriverManager.firefoxdriver().setup();
-            return new FirefoxDriver(new FirefoxOptions().merge(options));
+            return new FirefoxDriver((FirefoxOptions) options);
         } else if (browser.equals(BrowserName.CHROME.toString())) {
             WebDriverManager.chromedriver().setup();
-            return new ChromeDriver(new ChromeOptions().merge(options));
+            return new ChromeDriver((ChromeOptions) options);
         } else
             throw new IllegalArgumentException("Unknown browser name");
     }

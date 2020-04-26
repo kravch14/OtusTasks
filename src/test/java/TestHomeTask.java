@@ -2,6 +2,7 @@ import config.ServerConfig;
 import factory.WebDriverFactory;
 import listeners.ExecutionListener;
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 
 @Listeners(ExecutionListener.class)
 public class TestHomeTask {
@@ -25,13 +27,19 @@ public class TestHomeTask {
 
     @BeforeTest
     public void setUpDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
+
         browser = System.getProperty("browser", System.getenv("browser"));
         if (browser == null) {
             browser = BROWSER_CHROME;
         }
         browser = browser.toUpperCase();
+
+        //String option = System.getProperty("option");
+        ChromeOptions options = new ChromeOptions();
+        //options.addArguments("headless");
+        //options.addArguments("--disable-features=VizDisplayCompositor");
+        //options.addArguments("--no-sandbox");
+        //options.addArguments("--start-maximized");
         wd = WebDriverFactory.createNewDriver(browser, options);
         logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
