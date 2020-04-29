@@ -2,16 +2,13 @@ import config.ServerConfig;
 import factory.WebDriverFactory;
 import listeners.ExecutionListener;
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 
 @Listeners(ExecutionListener.class)
 public class TestHomeTask {
@@ -39,8 +36,6 @@ public class TestHomeTask {
         if (option == null) {
             wd = WebDriverFactory.createNewDriver(browser);
         } else {
-            //MutableCapabilities mutableCapabilities = new MutableCapabilities();
-            //options.addArguments(option, "--disable-gpu");
             wd = WebDriverFactory.createNewDriver(browser, option);
         }
         logger.info(browser + CREATE_DRIVER_MESSAGE);
