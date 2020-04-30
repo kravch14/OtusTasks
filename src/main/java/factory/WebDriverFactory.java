@@ -33,7 +33,7 @@ public class WebDriverFactory {
         } else if (browser.equals(BrowserName.CHROME.name())) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments(options);
+            chromeOptions.addArguments(options); //"--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
             return new ChromeDriver(chromeOptions);
         } else
             throw new IllegalArgumentException("Unknown browser name");
