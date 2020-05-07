@@ -28,7 +28,7 @@ public class TestHomeTask {
     @BeforeTest
     public void setUpDriver() {
         browser = System.getProperty("browser", System.getenv("browser"));
-        if (browser == null) {
+        if (browser == null || browser.trim().isEmpty()) {
             browser = BROWSER_CHROME;
         }
         browser = browser.toLowerCase();
