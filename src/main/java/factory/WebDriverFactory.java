@@ -1,6 +1,5 @@
 package factory;
 
-import enums.BrowserName;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,35 +7,28 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import static properties.GetProperty.getProp;
+
+
 public class WebDriverFactory {
 
-    public static WebDriver createNewDriver(String browser) {
-
-        if (browser.equals(BrowserName.FIREFOX.name())) {
-            WebDriverManager.firefoxdriver().setup();
-            return new FirefoxDriver();
-        } else if (browser.equals(BrowserName.CHROME.name())) {
-            WebDriverManager.chromedriver().setup();
-            return new ChromeDriver();
-        } else
-            throw new IllegalArgumentException("Unknown browser name");
-    }
-
-    public static WebDriver createNewDriver(String browser, String options) {
-
-        if (browser.equals(BrowserName.FIREFOX.name())) {
-            WebDriverManager.firefoxdriver().setup();
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments(options);
-            return new FirefoxDriver(firefoxOptions);
-
-        } else if (browser.equals(BrowserName.CHROME.name())) {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments(options); //"--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
-            return new ChromeDriver(chromeOptions);
-        } else
-            throw new IllegalArgumentException("Unknown browser name");
+    public static WebDriver createNewDriver() {
+        switch (getProp("browser").orElse("default").toLowerCase()) {
+            case "chrome":
+            case "google chrome":
+                WebDriverManager.chromedriver().setup();
+                return new ChromeDriver(new ChromeOptions() {{
+                    addArguments(getProp("options").orElse("").split(";"));
+                }});
+            case "ff":
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return new FirefoxDriver(new FirefoxOptions() {{
+                    addArguments(getProp("options").orElse("").split(";"));
+                }});
+            case "default":
+            default:
+                return new ChromeDriver();
+        }
     }
 }
-

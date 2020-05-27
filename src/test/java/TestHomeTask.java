@@ -1,5 +1,4 @@
 import config.ServerConfig;
-import factory.WebDriverFactory;
 import listeners.ExecutionListener;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(ExecutionListener.class)
+import static factory.WebDriverFactory.createNewDriver;
+
+
+//@Listeners(ExecutionListener.class)
 public class TestHomeTask {
 
-    public static final String BROWSER_CHROME = "chrome";
     public static final String CREATE_DRIVER_MESSAGE = " драйвер поднят";
     public static final String OPEN_PAGE_IN_BROWSER_MESSAGE = "Открыта страница в браузере";
     public static final String BROWSER_CLOSED_MESSAGE = "Браузер закрыт";
@@ -25,19 +26,7 @@ public class TestHomeTask {
 
     @BeforeTest
     public void setUpDriver() {
-
-        browser = System.getProperty("browser", System.getenv("browser"));
-        if (browser == null) {
-            browser = BROWSER_CHROME;
-        }
-        browser = browser.toUpperCase();
-
-        option = System.getProperty("options", System.getenv("options"));
-        if (option == null) {
-            wd = WebDriverFactory.createNewDriver(browser);
-        } else {
-            wd = WebDriverFactory.createNewDriver(browser, option);
-        }
+        wd = createNewDriver();
         logger.info(browser + CREATE_DRIVER_MESSAGE);
     }
 
