@@ -17,6 +17,7 @@ public class WebDriverFactory {
             case "chrome":
             case "google chrome":
                 WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
                 return new ChromeDriver(new ChromeOptions() {{
                     addArguments(getProp("options").orElse("").split(";"));
                 }});
