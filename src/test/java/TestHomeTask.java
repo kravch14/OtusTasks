@@ -15,7 +15,7 @@ import static factory.WebDriverFactory.createNewDriver;
 //@Listeners(ExecutionListener.class)
 public class TestHomeTask {
 
-    public static final String CREATE_DRIVER_MESSAGE = " драйвер поднят";
+    public static final String CREATE_DRIVER_MESSAGE = "Драйвер поднят";
     public static final String OPEN_PAGE_IN_BROWSER_MESSAGE = "Открыта страница в браузере";
     public static final String BROWSER_CLOSED_MESSAGE = "Браузер закрыт";
     protected static WebDriver wd;
@@ -27,7 +27,7 @@ public class TestHomeTask {
     @BeforeTest
     public void setUpDriver() {
         wd = createNewDriver();
-        logger.info(browser + CREATE_DRIVER_MESSAGE);
+        logger.info(CREATE_DRIVER_MESSAGE);
     }
 
     @Test

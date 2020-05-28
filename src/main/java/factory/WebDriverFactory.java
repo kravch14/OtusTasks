@@ -17,17 +17,18 @@ public class WebDriverFactory {
             case "chrome":
             case "google chrome":
                 WebDriverManager.chromedriver().setup();
-                return new ChromeDriver(new ChromeOptions() {{
-                    addArguments(getProp("options").orElse("").split(";"));
-                }});
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments(getProp("options").orElse("").split(";"));
+                return new ChromeDriver();
             case "ff":
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                return new FirefoxDriver(new FirefoxOptions() {{
-                    addArguments(getProp("options").orElse("").split(";"));
-                }});
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments(getProp("options").orElse("").split(";"));
+                return new FirefoxDriver();
             case "default":
             default:
+                WebDriverManager.chromedriver().setup();
                 return new ChromeDriver();
         }
     }
