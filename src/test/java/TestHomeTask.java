@@ -18,7 +18,7 @@ public class TestHomeTask {
     public static final String CREATE_DRIVER_MESSAGE = "Драйвер поднят";
     public static final String OPEN_PAGE_IN_BROWSER_MESSAGE = "Открыта страница в браузере";
     public static final String BROWSER_CLOSED_MESSAGE = "Браузер закрыт";
-    protected static WebDriver wd;
+    protected WebDriver wd;
     private static final Logger logger = LogManager.getLogger(TestHomeTask.class);
     private String browser;
     private String option;
